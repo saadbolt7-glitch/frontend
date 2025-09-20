@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useTheme } from '../../hooks/useTheme';
 import DashboardSidebar from './DashboardSidebar';
 import DashboardContent from './DashboardContent';
+import DevicesPage from './DevicesPage';
+import AlarmsTable from './AlarmsTable';
 import { Device } from '../../services/api';
 import DashboardHeader from './DashboardHeader';
 
@@ -47,10 +49,18 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 
         {/* Switch content based on activeTab */}
         <div className="flex-1">
-          <DashboardContent 
-            selectedDevice={selectedDevice} 
-            selectedHierarchy={selectedHierarchy}
-          />
+          {activeTab === 'Dashboard' && (
+            <DashboardContent 
+              selectedDevice={selectedDevice} 
+              selectedHierarchy={selectedHierarchy}
+            />
+          )}
+          {activeTab === 'Devices' && <DevicesPage />}
+          {activeTab === 'Alarms' && (
+            <div className="p-6 bg-[#1E1F2E] min-h-screen">
+              <AlarmsTable />
+            </div>
+          )}
         </div>
       </div>
     </div>
